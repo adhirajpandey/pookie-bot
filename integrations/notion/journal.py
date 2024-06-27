@@ -203,11 +203,12 @@ def get_journal_data(date: str = get_current_date()) -> dict:
 
     tasks = []
     for entry in today_tasks_children["results"]:
-        task = {
-            "text": entry["to_do"]["rich_text"][0]["plain_text"],
-            "completed": entry["to_do"]["checked"],
-        }
-        tasks.append(task)
+        if entry["to_do"]["rich_text"]:
+            task = {
+                "text": entry["to_do"]["rich_text"][0]["plain_text"],
+                "completed": entry["to_do"]["checked"],
+            }
+            tasks.append(task)
 
     # pprint(tasks)
     page_data["tasks"] = tasks
