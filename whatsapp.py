@@ -50,11 +50,15 @@ def twilio():
     print(datadict)
 
     if status == "received":
-        gemini_date_resp = json.loads(gemini_call_json(QUERY2 + datadict["message_text"]))
+        gemini_date_resp = json.loads(
+            gemini_call_json(QUERY2 + datadict["message_text"])
+        )
         notion_data = get_journal_data(gemini_date_resp["date"])
 
         if "tasks" in datadict["message_text"]:
-            gemini_status_resp = json.loads(gemini_call_json(QUERY3 + datadict["message_text"]))
+            gemini_status_resp = json.loads(
+                gemini_call_json(QUERY3 + datadict["message_text"])
+            )
             tasks = notion_tasks.get_filtered_task(gemini_status_resp["status"])
 
             resp = gemini_call(QUERY1 + str(notion_data) + str(tasks))

@@ -18,6 +18,7 @@ def gemini_call(query):
     response = model.generate_content(query)
     return response.text
 
+
 def gemini_call_json(query):
     response = model_json.generate_content(query)
     return response.text
