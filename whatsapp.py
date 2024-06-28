@@ -52,21 +52,19 @@ def twilio():
 
     # todo - add another check if message is from allowed numbers
     if status == "received":
-        gemini_date_resp = json.loads(
-            gemini_call_json(
-                DATE_EXTRACTION_PROMPT.format(current_date=get_current_date())
-                + whatsapp_data_dict["message_text"]
-            )
+        gemini_date_resp = gemini_call_json(
+            DATE_EXTRACTION_PROMPT.format(current_date=get_current_date())
+            + whatsapp_data_dict["message_text"]
         )
+
         notion_data = get_journal_data(gemini_date_resp["date"])
 
         # todo - use another llm api call to check if it's required to fetch tasks
         if "tasks" in whatsapp_data_dict["message_text"]:
-            gemini_status_resp = json.loads(
-                gemini_call_json(
-                    FILTER_SELECTION_PROMPT + whatsapp_data_dict["message_text"]
-                )
+            gemini_status_resp = gemini_call_json(
+                FILTER_SELECTION_PROMPT + whatsapp_data_dict["message_text"]
             )
+
             tasks = get_filtered_task(gemini_status_resp["status"])
 
             resp = gemini_call(SUMMARISATION_PROMPT + str(notion_data) + str(tasks))
