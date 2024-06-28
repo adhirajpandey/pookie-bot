@@ -3,7 +3,7 @@ from flask import Flask, request
 import os
 import json
 from dotenv import load_dotenv
-from integrations.notion.journal import get_journal_data
+from integrations.notion.journal import get_journal_data, get_current_date
 from integrations.notion.tasks import get_filtered_task
 from llms.gemini import gemini_call, gemini_call_json
 from prompts import (
@@ -54,7 +54,8 @@ def twilio():
     if status == "received":
         gemini_date_resp = json.loads(
             gemini_call_json(
-                DATE_EXTRACTION_PROMPT + whatsapp_data_dict["message_text"]
+                DATE_EXTRACTION_PROMPT.format(current_date=get_current_date())
+                + whatsapp_data_dict["message_text"]
             )
         )
         notion_data = get_journal_data(gemini_date_resp["date"])

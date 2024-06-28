@@ -1,5 +1,3 @@
-from integrations.notion.journal import get_journal_data, get_current_date
-
 SUMMARISATION_PROMPT = """Use following information to summarise the given journal entry for Adhiraj: 
 1. Currency is Rs(INR). 
 2. 0 Values means not upto satisfaction. 
@@ -8,7 +6,7 @@ SUMMARISATION_PROMPT = """Use following information to summarise the given journ
 
 Add a seperate section for Tasks."""
 
-DATE_EXTRACTION_PROMPT = f"""Current Date is {get_current_date()}. Extract the date from following message in YYYY-MM-DD format. 
+DATE_EXTRACTION_PROMPT = """Current Date is {current_date}. Extract the date from following message in YYYY-MM-DD format. 
 Response format - date should be key and actual extracted date should be value"""
 
 FILTER_SELECTION_PROMPT = """Choose the most suitable status string from following message. Only choose from exactly 'In progress' or 'Done' or 'Not started'.
