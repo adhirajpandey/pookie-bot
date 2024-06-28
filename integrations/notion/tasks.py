@@ -31,8 +31,8 @@ def fetch_tasks(tasks_db_id: str, filter_str: str) -> dict:
         response_data = response.json()
 
         return response_data
-    except:
-        print("Error in fetching tasks")
+    except Exception as e:
+        print("Error in fetching tasks", e)
 
 
 def extract_task_details(tasks: list) -> list:

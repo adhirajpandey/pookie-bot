@@ -3,7 +3,7 @@ from flask import Flask, request
 import os
 import json
 from dotenv import load_dotenv
-from integrations.notion.journal import get_journal_data, get_current_date
+from integrations.notion.journal import get_journal_data
 from integrations.notion.tasks import get_filtered_task
 from llms.gemini import gemini_call, gemini_call_json
 from prompts import (
